@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        body{
+            background: linear-gradient(to left,rgb(243, 218, 218), #c6e8ff);
+        }
+      div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        text-align: center;
+        transform: translate(-50%, -50%);
+      }
+      b {
+        color: rgb(169, 19, 19);
+        font-size: larger;
+        font-weight: 700;
+      }
+      div {
+        background: #87cfff;
+        /* color: rgb(230, 227, 227); */
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 1px 1px 40px black;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>My IP Location</h1>
+      <h2>
+        From:
+        <a href="https://ip-api.com/docs/api:json" target="_blank"
+          >https://ip-api.com/docs/api:json</a
+        >
+      </h2>
+      <p>Your Ip address is: <b id="ip"></b></p>
+      <p>Your Address is: <b id="address"></b></p>
+      <p>Your ZIP code is: <b id="zip"></b></p>
+      <p>Your latitude is: <b id="lat"></b></p>
+      <p>Your longitude is: <b id="lon"></b></p>
+    </div>
+    <script>
+      let ip = document.getElementById("ip");
+      let address = document.getElementById("address");
+      let zip = document.getElementById("zip");
+      let lat = document.getElementById("lat");
+      let lon = document.getElementById("lon");
+
+      let file = "http://ip-api.com/json/?fields=61439";
+      fetch(file)
+        .then((res) => res.json())
+        .then((res) => {
+          ip.innerHTML = res.query;
+          // address.innerHTML = res.city + res.country  + res.regionName + res.countryCode;
+          address.innerHTML =
+            res.city +
+            " " +
+            res.regionName +
+            " " +
+            res.country +
+            "(" +
+            res.countryCode +
+            ")";
+
+          zip.innerHTML = res.zip;
+          lat.innerHTML = res.lat;
+          lon.innerHTML = res.lon;
+        });
+      let z = "http://ip-api.com/json/?fields=61439";
+      fetch(z)
+        .then((res) => res.json())
+        .then((res) => console.log(res));
+    </script>
+  </body>
+</html>
